@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:testapk/Page/Details.dart';
+import 'package:testapk/basketitem.dart';
+import 'package:testapk/cart.dart';
 import 'dart:convert' as convert;
 
 import 'package:testapk/theme/color.dart';
 Widget myappbar(context){
-  return  AppBar(title: Text('HiTic',),
-    centerTitle: true,
-    backgroundColor: primary,
+  return   AppBar(title: Text('data'),
     actions: [
-      IconButton(icon: Icon(Icons.search,color: Colors.white,),
-          color: Colors.white, onPressed: (){
-        showSearch(context: context, delegate: TheSearch());
-          })],
-    elevation:10,
-    titleSpacing: 25,
-    leading: IconButton(icon: Icon(Icons.list,color: Colors.white,),),
+      Row(
+        children: [
+          IconButton(icon: Icon(Icons.shopping_basket_sharp), onPressed: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context){
+              return basket();
+            }));
+          }),
+          Consumer<cart>(builder: (context,cart,chlid){
+            return Text('${cart.count}');
+          })
+        ],
+      )
+    ],
+
   );
 }
 

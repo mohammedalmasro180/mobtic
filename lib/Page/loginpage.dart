@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testapk/Page/Catogery.dart';
 import 'package:testapk/Page/HomeScreen.dart';
+import 'package:testapk/Page/loginn.dart';
 import 'package:testapk/Page/signup.dart';
 import 'package:testapk/Widget/appbar.dart';
 import 'package:testapk/theme/color.dart';
@@ -52,28 +53,28 @@ class _loginuiState extends State<loginui> {
 
 
   var ed;
-  signup() async {
+  login() async {
+    var response;
     var fromdata = formstate.currentState;
     if (fromdata.validate()) {
       fromdata.save();
-      setState(() {
-        liading=true;
-      });
       var data = {"username": username.text, "password": password.text};
-      var url = "https://tpowep.com/mob/logincode.php";
+      var url = "https://tpowep.com/storepanal/storepanal/loginmhd.php";
       var reesponse = await http.post(url, body: data);
-      var responsebody = jsonDecode(reesponse.body);
-      ed=responsebody;
-      print(reesponse.body);
+      response=    jsonDecode(reesponse.body);
+      //ed=responsebody;
+      print(response);
+      print(liading);
+
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) =>HomeScreen()));
 
     }
 
-    else {
-      setState(() {
-        liading=false;
-      });
-      
-    }
+
+
+
+
   }
 
 
@@ -83,10 +84,9 @@ class _loginuiState extends State<loginui> {
   @override
   Widget build(BuildContext context) {
     setState(() {
+
       saveperf(username.text);
     });
-    password.text="pass212212";
-    username.text="user@tpowep.com";
 
     var mdw=MediaQuery.of(context).size.width;
 
@@ -239,6 +239,7 @@ class _loginuiState extends State<loginui> {
                               boxShadow: [
                                 BoxShadow(
                                     color: Colors.black,
+
                                     blurRadius: 4,
                                     spreadRadius: 0.1
                                 )
@@ -266,11 +267,15 @@ class _loginuiState extends State<loginui> {
                               color: rowto,
                               padding: EdgeInsets.symmetric(vertical: 10,horizontal: 40),
                               onPressed:() {
-                                signup();
-                                saveperf(username.text);
-                                Navigator.pushReplacement(
-                                    context, MaterialPageRoute(
-                                    builder: (context) => HomeScreen()));
+    var fromdata = formstate.currentState;
+    if (fromdata.validate()) {
+    fromdata.save();
+    login();
+    saveperf(username.text);
+
+
+    }
+
                               },
 
                               child: Row(
@@ -314,51 +319,6 @@ class _loginuiState extends State<loginui> {
                           ),
 
                         ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 50,right: 50),
-                            child: Row(
-                              children: [
-
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Expanded(child:
-                                  RaisedButton(
-                                    color:rowone,
-                                    onPressed: () {  },
-                                    child: Row(
-
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Image.asset("img/g.png",width: 25,height: 25,),
-                                        ),
-                                        Text("تسجيل الدخول مع جوجل")
-                                      ],
-                                    ),
-                                  )),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Expanded(child:
-                                  RaisedButton(
-                                    color:sh,
-                                    onPressed: () {  },
-                                    child: Row(
-
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Image.asset("img/f.png",width: 25,height: 25,),
-                                        ),
-                                        Text("تسجيل الدخول مع فيسبوك")
-                                      ],
-                                    ),
-                                  )),
-                                ),
-
-                              ],
-                            ),
-                          ),
 
 
                       ],
@@ -376,6 +336,9 @@ class _loginuiState extends State<loginui> {
     );
   }
 }
+
+
+
 
 TextFormField bulidtextfield(String hint,TextEditingController Controller,myvalid)
 {

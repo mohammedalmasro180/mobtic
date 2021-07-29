@@ -15,7 +15,7 @@ class _CatogeryState extends State<Catogery> {
   @override
   //
   Future getdata() async{
-    var url="https://tpowep.com/mob/cat.php";
+    var url="https://tpowep.com/storepanal/storepanal/cat/catpro.php";
     var respomose=await http.get(url);
     var respomosebody=convert.jsonDecode(respomose.body);
     return respomosebody;
@@ -46,10 +46,10 @@ class _CatogeryState extends State<Catogery> {
                               child: Column(
                                 children: [
                                   Expanded(child:
-                                  Image.network("https://tpowep.com/mob/admin/images/"+snapshot.data[i]['image'],)
+                                  Image.network("https://tpowep.com/storepanal/storepanal/"+snapshot.data[i]['img'],)
                                   ),
 
-                                  Text(snapshot.data[i]['cname'])
+                                  Text(snapshot.data[i]['text'])
 
                                 ],
                               ),
@@ -59,7 +59,7 @@ class _CatogeryState extends State<Catogery> {
                         onTap: (){
                           Navigator.of(context).push(MaterialPageRoute(builder: (context){
                             return sent(
-                              cat:snapshot.data[i]['cname'],
+                              cat:snapshot.data[i]['category'],
                             );
                           }));
                         },

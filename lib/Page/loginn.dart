@@ -287,17 +287,11 @@ class _loginState extends State<login> {
 
 
                             margin: EdgeInsets.only(top: 20),
-                            child:RaisedButton
+                            child:RaisedButton (
 
-                              (
-
+                              color: sh,
                               padding: EdgeInsets.symmetric(vertical: 10,horizontal: 40),
                               onPressed:(){
-                          loginn();
-
-                          saveperf(username.text);
-                                Navigator.pushReplacement(
-                                    context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
                               },
                               child: Row(
@@ -312,6 +306,7 @@ class _loginState extends State<login> {
 
                             )
                         ),
+
 
 
                       ],
@@ -379,12 +374,12 @@ signup() async {
   if (fromdata.validate()) {
     fromdata.save();
     var data = {
-      "username": username.text,
-      "password": password.text,
-      "name": name.text,
-      "phone": phone.text
+      "Email": username.text,
+      "pass": password.text,
+      "Firstname": name.text,
+      "Number": phone.text
     };
-    var url = "https://tpowep.com/mob/signup.php";
+    var url = "https://tpowep.com/storepanal/storepanal/addmember.php";
     var reesponse = await http.post(url, body: data);
     var responsebody = jsonDecode(reesponse.body);
   }

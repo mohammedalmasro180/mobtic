@@ -8,8 +8,12 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="testapk"
+        android:label="tpotic"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5721905078810865~3068634743"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

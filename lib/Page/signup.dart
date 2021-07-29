@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testapk/Page/HomeScreen.dart';
 import 'package:testapk/Page/Login.dart';
 import 'package:http/http.dart' as http;
+import 'package:testapk/Page/loginn.dart';
 import 'dart:convert';
 import 'package:testapk/Page/loginpage.dart';
 import 'package:testapk/Widget/appbar.dart';
@@ -12,7 +14,7 @@ class singup extends StatefulWidget {
   _singupState createState() => _singupState();
 }
 TextEditingController phone=new TextEditingController();
-TextEditingController username=new TextEditingController();
+TextEditingController usernamefiled=new TextEditingController();
 TextEditingController password=new TextEditingController();
 TextEditingController name=new TextEditingController();
 
@@ -23,7 +25,8 @@ class _singupState extends State<singup> {
   @override
 
 
-  Widget build(BuildContext context) {
+  Widget build(
+      BuildContext context) {
 
 
     bool selected = false;
@@ -127,7 +130,7 @@ class _singupState extends State<singup> {
                             child: Container(
 
                               padding: EdgeInsets.all(30),
-                              height: 550,
+                              height: mhw/2,
                               width: mdw/1.2,
 
                               child:Padding(
@@ -145,7 +148,7 @@ class _singupState extends State<singup> {
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: bulidtextfield("البريد الالكتروني", username,validuser)
+                                          child: bulidtextfield("البريد الالكتروني", usernamefiled,validuser)
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -153,7 +156,7 @@ class _singupState extends State<singup> {
                                             validator: validpass,
                                             controller: password,
                                             obscureText: true,
-                                            keyboardType: TextInputType.number,
+    //                                        keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
                                                 labelText: "كلمة المرور",
                                                 filled: true,
@@ -168,7 +171,7 @@ class _singupState extends State<singup> {
                                           ),                                          ),
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: bulidtextfield("الهاتف",phone,validuser)
+                                          child: bulidtextfield("الهاتف",phone,validph)
                                         ),
 
 
@@ -216,8 +219,7 @@ class _singupState extends State<singup> {
                                       //
 
                                     onTap: (){
-                                      Navigator.pushReplacement(
-                                          context, MaterialPageRoute(builder: (context) =>loginui()));
+                                      Navigator.pushReplacement(                                          context, MaterialPageRoute(builder: (context) =>loginui()));
 
                                     },
 
@@ -236,19 +238,27 @@ class _singupState extends State<singup> {
 
                                   (
 
+                                  color: sh,
+
                                   padding: EdgeInsets.symmetric(vertical: 10,horizontal: 40),
                                   onPressed:(){
-                                    signup();
+                                    var fromdata = formstate.currentState;
+                                    if (fromdata.validate()) {
+                                      fromdata.save();
+                                      signup(context);
+                                      saveperf(username.text);
 
-                                    Navigator.pushReplacement(
-                                        context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                                      Navigator.pushReplacement(
+                                          context, MaterialPageRoute(builder: (context) => HomeScreen()));
 
-                                     },
+                                    }
+
+                                  },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Text("تسجيل الدخول",style: TextStyle(color:Colors.white),),
+                                      Text("تسجيل ",style: TextStyle(color:Colors.white),),
                                       Icon(Icons.arrow_forward,color: Colors.white,
                                       )
                                     ],
@@ -307,6 +317,14 @@ String validpass(String val){
     return "كلمة المرور اطول من 5 احرف";
 
 }
+String validph(String val){
+  if (val.isEmpty)
+    return "الرجاء ادخال الحقل";
+
+  if (val.trim().length<5)
+    return "الهاتف اطول من 5 احرف";
+
+}
 
 String confirempass(String val){
   if (val.isEmpty)
@@ -318,18 +336,31 @@ String confirempass(String val){
 
 
   }
-signup() async {
-  var fromdata = formstate.currentState;
-  if (fromdata.validate()) {
-    fromdata.save();
-    var data = {
-      "username": username.text,
-      "password": password.text,
-      "name": name.text,
-      "phone": phone.text
-    };
-    var url = "https://tpowep.com/mob/signup.php";
-    var reesponse = await http.post(url, body: data);
-    var responsebody = jsonDecode(reesponse.body);
-  }
+signup(BuildContext context) async {
+  var data = {
+    "Email": usernamefiled.text,
+    "pass": password.text,
+    "Firstname": name.text,
+    "address": name.text,
+    "Lastname": name.text,
+    "Number": phone.text
+  };
+  var url = "https://tpowep.com/storepanal/storepanal/addmember.php";
+  var reesponse = await http.post(url, body: data);
+  var responsebody = jsonDecode(reesponse.body);
+  print(usernamefiled.text);
+  print(password.text);
+  print(name.text);
+
+
+
+}
+
+
+saveperf(String username)async  {
+  username=usernamefiled.text;
+  SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
+  sharedPreferences.setString("username", username);
+  print(sharedPreferences.get("username"));
+
 }

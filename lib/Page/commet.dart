@@ -40,7 +40,7 @@ class _commentState extends State<comment> {
 
               alignment: FractionalOffset.topLeft,
               child: Padding(
-                padding: const EdgeInsets.all(50),
+                padding: const EdgeInsets.all(15),
                 child: FutureBuilder(
                     future: getdata(widget.id),
                     builder:(BuildContext context, AsyncSnapshot snapshot) {

@@ -18,7 +18,7 @@ class homepro extends StatefulWidget {
 class _homeproState extends State<homepro> {
 
   Future getdata() async {
-    var url = "https://tpowep.com/mob/api.php";
+    var url = "https://tpowep.com/storepanal/storepanal/productt.php";
     var respomose = await http.get(url);
     var respomosebody = convert.jsonDecode(respomose.body);
     return respomosebody;
@@ -44,19 +44,20 @@ class _homeproState extends State<homepro> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: GridTile(child:
-                        Image.network("https://tpowep.com/mob/admin/images/"+snapshot.data[i]['iname'],),
+                        Image.network("https://tpowep.com/storepanal/storepanal/"+snapshot.data[i]['location'],),
                           footer: Container(
                               color:sh,
-                              child: Text(snapshot.data[i]['mname'],textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 15),)),),
+                              child: Text(snapshot.data[i]['name'],textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 15),)),),
                       ),
                       onTap: (){
                         Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                          return  Details(name:snapshot.data[i]['mname'],
-                            poss:snapshot.data[i]['pross'],
-                            ram:snapshot.data[i]['ram'],
-                            cam:snapshot.data[i]['camera'],
+                          return  Details(
+                            name: snapshot.data[i]['name'],
+                            description: snapshot.data[i]['description'],
                             price: snapshot.data[i]['price'],
-                            img:snapshot.data[i]['iname'],
+                            img: snapshot.data[i]['location'],
+                            quantity: snapshot.data[i]['quantity'],
+
                           );
                         }));
                       },
