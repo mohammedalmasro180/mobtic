@@ -125,8 +125,8 @@ class _DetailsState extends State<Details> {
                           padding: EdgeInsets.all(10),
     child:  Consumer<cart>(builder: (context,cart,chlid){
 
-    List<Item>item=[
-    Item(name: widget.name,price:double.parse(widget.price), img: widget.img,id: 1)];
+      List<Item>item=[
+        Item(name: widget.name,price:double.parse(widget.price), img: widget.img,id: 1)];
     return
       RaisedButton (
           color: sh,
@@ -136,6 +136,7 @@ class _DetailsState extends State<Details> {
 
               )  async {
             cart.add(item[0]);
+            _addcart(context);
           },
 
           child:
@@ -144,7 +145,7 @@ class _DetailsState extends State<Details> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text("اضافة الى السلة",
-                style: TextStyle(color: Colors.white),),
+                style: TextStyle(color: coltes),),
               Icon(Icons.arrow_forward, color: primary,
               )
             ],

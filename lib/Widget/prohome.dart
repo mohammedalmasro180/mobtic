@@ -47,7 +47,7 @@ class _homeproState extends State<homepro> {
                         Image.network("https://tpowep.com/storepanal/storepanal/"+snapshot.data[i]['location'],),
                           footer: Container(
                               color:sh,
-                              child: Text(snapshot.data[i]['name'],textAlign: TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 15),)),),
+                              child: Text(snapshot.data[i]['name'],textAlign: TextAlign.center,style: TextStyle(color: coltes,fontSize: 15),)),),
                       ),
                       onTap: (){
                         Navigator.of(context).push(MaterialPageRoute(builder: (context){

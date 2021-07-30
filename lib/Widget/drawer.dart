@@ -121,7 +121,7 @@ else InkWell(
   ),
   onTap: (){
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => login()));
+        context, MaterialPageRoute(builder: (context) => loginui()));
 
   },
 )

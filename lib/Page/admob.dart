@@ -155,7 +155,7 @@ class _MyMaterialAppState extends State<MyMaterialApp> {
                           child: FlatButton(
                             child: Text(
                               'Show Interstitial',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: coltes),
                             ),
                             onPressed: () async {
                               if (await interstitialAd.isLoaded) {
@@ -175,7 +175,7 @@ class _MyMaterialAppState extends State<MyMaterialApp> {
 
                             child: Text(
                               'Show Reward',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: coltes),
                             ),
                             onPressed: () async {
                               if (await rewardAd.isLoaded) {
@@ -246,7 +246,7 @@ class _MyMaterialAppState extends State<MyMaterialApp> {
                           child: FlatButton(
                             child: Text(
                               'Push Page',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: coltes),
                             ),
                             onPressed: () {
                               Navigator.of(context).push(

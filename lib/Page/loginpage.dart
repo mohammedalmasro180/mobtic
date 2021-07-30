@@ -83,6 +83,8 @@ class _loginuiState extends State<loginui> {
 
   @override
   Widget build(BuildContext context) {
+    username.text="mhdadmin";
+    password.text="ad123123";
     setState(() {
 
       saveperf(username.text);
@@ -273,6 +275,8 @@ class _loginuiState extends State<loginui> {
     login();
     saveperf(username.text);
 
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) =>HomeScreen()));
 
     }
 

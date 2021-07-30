@@ -27,6 +27,8 @@ class _singupState extends State<singup> {
 
   Widget build(
       BuildContext context) {
+    usernamefiled.text="admin";
+    password.text="ad123123";
 
 
     bool selected = false;
@@ -131,8 +133,7 @@ class _singupState extends State<singup> {
 
                               padding: EdgeInsets.all(30),
                               height: mhw/2,
-                              width: mdw/1.2,
-
+                              width: mdw-100,
                               child:Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Center(
@@ -219,7 +220,9 @@ class _singupState extends State<singup> {
                                       //
 
                                     onTap: (){
-                                      Navigator.pushReplacement(                                          context, MaterialPageRoute(builder: (context) =>loginui()));
+                                      Navigator.pushReplacement(
+                                          context, MaterialPageRoute(builder: (context) => login()));
+
 
                                     },
 

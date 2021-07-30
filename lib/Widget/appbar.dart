@@ -9,6 +9,7 @@ import 'dart:convert' as convert;
 import 'package:testapk/theme/color.dart';
 Widget myappbar(context){
   return   AppBar(title: Text('data'),
+    backgroundColor: primary,
     actions: [
       Row(
         children: [
