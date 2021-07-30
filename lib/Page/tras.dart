@@ -52,11 +52,11 @@ class _sentState extends State<sent> {
 
                       return
 
-                      Consumer<cart>(builder: (context,cart,chlid)
-                      {
-                        return
+                        Consumer<cart>(builder: (context,cart,chlid)
+                        {
+                          return
 
-                          InkWell(
+                            InkWell(
                             child: Container(
                               height: 250,
 

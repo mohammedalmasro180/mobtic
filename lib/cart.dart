@@ -18,6 +18,9 @@ class cart with ChangeNotifier{
   int get count{
     return _list.length;
   }
+  double get total{
+    return _price;
+  }
   double get priceee{
     return _price;
   }

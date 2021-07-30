@@ -123,43 +123,41 @@ class _DetailsState extends State<Details> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(                          width: MediaQuery.of(context).size.width,
                           padding: EdgeInsets.all(10),
+    child:  Consumer<cart>(builder: (context,cart,chlid){
 
-                          child:RaisedButton (
-                            color: sh,
+    List<Item>item=[
+    Item(name: widget.name,price:double.parse(widget.price), img: widget.img,id: 1)];
+    return
+      RaisedButton (
+          color: sh,
 
-                            padding: EdgeInsets.symmetric(vertical: 10,horizontal: 40),
-                            onPressed: ()  async {
-                        //       SharedPreferences preferences=await SharedPreferences.getInstance();
-                        //       String username=  preferences.getString("username");
-                        // print(username);
-                        //       if(username!=null) {
-                        //         bay();
-                        //         _addcart(context);
+          padding: EdgeInsets.symmetric(vertical: 10,horizontal: 40),
+          onPressed: (
 
-    // ignore: missing_return
-    Consumer<cart>(builder: (context,cart,chlid){
+              )  async {
+            cart.add(item[0]);
+          },
 
-      List<Item>item=[
-        Item(name: widget.name,price: widget.price, img: widget.img,id: 1)];
+          child:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("اضافة الى السلة",
+                style: TextStyle(color: Colors.white),),
+              Icon(Icons.arrow_forward, color: primary,
+              )
+            ],
+          )
 
-      cart.add(item[0]);
-     print(cart.basketitem[0]);
+      );
 
     }
-    );
-                            },
+    ),
 
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text("اضافة الى السلة",style: TextStyle(color:Colors.white),),
-                                Icon(Icons.arrow_forward,color: primary,
-                                )
-                              ],
-                            ),
 
-                          )
+
+
                       ),
                     ),
 
@@ -181,11 +179,11 @@ class _DetailsState extends State<Details> {
     SharedPreferences preferences=await SharedPreferences.getInstance();
     String username=  preferences.getString("username");
 
-      var data = {
+    var data = {
       "name": widget.name,
       "img":widget.img,
       "user": username,
-    "price": widget.price,
+      "price": widget.price,
     };
     var url = "https://tpowep.com/storepanal/storepanal/orderss.php";
     var reesponse = await http.post(url, body: data);
